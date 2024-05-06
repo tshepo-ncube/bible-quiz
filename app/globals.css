@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.shape {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  transform: scale(0.8);
+}
+.cir {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 5;
+}
+.btn-contain {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  background: #333;
+  text-align: center;
+  z-index: 10;
+  transition: 0.2s;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0px 1px 5px 2px #bfceef;
+}
+.btn:active,
+.btn:hover,
+.btn:focus {
+  outline: none !important;
+  color: white;
+}
+.btn-particles {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  color: #eee;
+  font-family: monospace;
+  z-index: 5;
+  /*  filter: url(#gooeyness); */
+}
+.btn:active {
+  transform: scale(0.9) translate(-55%, -55%);
+}
+
+.star-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Adjust height as needed */
+}
+
+.star {
+  position: absolute;
+  width: 20px; /* Adjust star size */
+  height: 20px; /* Adjust star size */
+  background-color: yellow; /* Star color */
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  animation: twinkle 1s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.shape {
+  position: absolute;
+  transition: transform 1s ease-in-out; /* Add transition for movement */
+}
+
+/* explosion container */
+.explosion {
+  position: absolute; /* required if positioned on click else 'relative' */
+  width: 600px; /* adjust as needed */
+  height: 600px; /* adjust as needed */
+  pointer-events: none; /* make it clickable through */
+}
+
+/* particle styling */
+.particle {
+  position: absolute; /* required */
+  width: 10px; /* adjust particle size */
+  height: 10px; /* adjust particle size */
+  border-radius: 50%;
+  animation: pop 1s reverse forwards; /* required */
+}
+
+/* animation for particle fly away from the cursor */
+@keyframes pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}
