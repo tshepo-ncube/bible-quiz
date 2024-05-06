@@ -17,18 +17,22 @@ export default function QuizComponent() {
   const [progress, setProgress] = useState(7);
   const [showHint, setShowHint] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    const id = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress <= 0) {
-          clearInterval(interval);
+          clearInterval(id);
           return 0;
         }
         return prevProgress - 1;
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    setIntervalId(id);
+
+    return () => clearInterval(id);
   }, []);
 
   const handleHint = () => {
@@ -80,10 +84,12 @@ export default function QuizComponent() {
     const y = buttonRect.top + buttonRect.height / 2;
     explode(x, y);
   };
-
+  const stopProgress = () => {
+    clearInterval(intervalId);
+  };
   const handleButtonClick = (option) => {
     setClickedOption(option.target.name);
-
+    stopProgress();
     console.log(option.target.name);
     console.log(option.target);
     // Check if the clicked option is correct
