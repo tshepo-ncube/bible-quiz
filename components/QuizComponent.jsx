@@ -160,20 +160,22 @@ export default function QuizComponent() {
         ) : (
           <></>
         )}
-        <button
-          onClick={handleHint}
-          className="bg-yellow-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800"
-        >
-          show hint &#x1f48e; 100
-        </button>
+        <div className="mt-6">
+          <button
+            onClick={handleHint}
+            className="bg-yellow-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800"
+          >
+            show hint &#x1f48e; 100
+          </button>
 
-        <button className="bg-purple-400 text-white w-full mt-4 p-2 rounded hover:bg-purple-800">
-          more time &#x1f48e; 90
-        </button>
+          <button className="bg-purple-400 text-white w-full mt-4 p-2 rounded hover:bg-purple-800">
+            more time &#x1f48e; 90
+          </button>
 
-        <button className="bg-blue-400 text-white w-full mt-4 p-2 rounded hover:bg-purple-800">
-          skip &#x1f48e; 98
-        </button>
+          <button className="bg-blue-400 text-white w-full mt-4 p-2 rounded hover:bg-blue-800">
+            skip &#x1f48e; 98
+          </button>
+        </div>
       </div>
     </main>
   );
