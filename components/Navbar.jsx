@@ -2,8 +2,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
 import { initializeApp } from "firebase/app";
 import {
@@ -154,13 +152,13 @@ const Navbar = ({ isHome }) => {
       >
         <Link href="/">
           <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
-            MindfulManifesters
+            Tebby
           </h1>
         </Link>
         <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
           <li className="p-4 text-white">
             <Link href="/" className="p-4 text-white">
-              Create Quiz
+              Play
             </Link>
           </li>
 
@@ -175,9 +173,9 @@ const Navbar = ({ isHome }) => {
               {/* <li className="p-4">
                 <Link href="/goals">My Goals</Link>
               </li> */}
-              <li className="p-4">
+              {/* <li className="p-4">
                 <Link href="/profile">Profile</Link>
-              </li>
+              </li> */}
             </>
           ) : (
             <>
@@ -186,7 +184,12 @@ const Navbar = ({ isHome }) => {
               </li> */}
             </>
           )}
-
+          <li className="p-4">
+            <Link href="/leaderboard">Leaderboard</Link>
+          </li>
+          <li className="p-4">
+            <Link href="/shop">Shop</Link>
+          </li>
           {/* <li className="p-4">
             <Link href="/blog">Blog</Link>
           </li> */}
@@ -194,9 +197,7 @@ const Navbar = ({ isHome }) => {
           {/* <li className="p-4">
             <Link href="/about">About</Link>
           </li> */}
-          <li className="p-4">
-            <Link href="/pricing">Pricing</Link>
-          </li>
+
           <li className="p-4">
             {signedIn ? (
               <>
@@ -270,12 +271,12 @@ const Navbar = ({ isHome }) => {
               </>
             )}
 
-            {/* <li
+            <li
               onClick={handleNav}
               className="p-4 text-4xl hover:text-gray-500"
             >
               <Link href="/blog">Blog</Link>
-            </li> */}
+            </li>
             <hr style={{ marginTop: 8 }} />
             {/* <li className="p-4 text-4xl hover:text-gray-500">
               <Link href="/about">About</Link>

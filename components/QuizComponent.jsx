@@ -2,8 +2,43 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import QuestionComponent from "@/components/QuizComponent";
+import Head from "next/head";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 export default function QuizComponent() {
   const [clickedOption, setClickedOption] = useState(null);
+  const [playLevelUp, setPlayLevelUp] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
+
+  const handleLevelUp = () => {
+    setPlayLevelUp(true);
+    // Play the sound
+
+    if (soundOn) {
+      const audio = new Audio("/success-1-6297.mp3");
+      audio.play();
+    }
+  };
+  const handleLevelDown = () => {
+    setPlayLevelUp(true);
+    // Play the sound
+
+    if (soundOn) {
+      const audio = new Audio("/error.mp3");
+      audio.play();
+    }
+  };
+
+  const handleTimeup = () => {
+    setPlayLevelUp(true);
+    // Play the sound
+
+    if (soundOn) {
+      const audio = new Audio("/error_sound.mp3");
+      audio.play();
+    }
+  };
 
   const options = ["Option 1", "Option 2", "Option 3", "Option 4"]; // Example options
   const object = {
@@ -22,6 +57,9 @@ export default function QuizComponent() {
   useEffect(() => {
     const id = setInterval(() => {
       setProgress((prevProgress) => {
+        if (prevProgress == 0) {
+          handleTimeup();
+        }
         if (prevProgress <= 0) {
           clearInterval(id);
           return 0;
@@ -95,7 +133,7 @@ export default function QuizComponent() {
     // Check if the clicked option is correct
     if (option.target.name === object.answer) {
       //alert("yess");
-
+      handleLevelUp();
       const button = option.target;
       const buttonRect = button.getBoundingClientRect();
       const x = buttonRect.left + buttonRect.width / 2;
@@ -103,17 +141,38 @@ export default function QuizComponent() {
       explode(x, y);
     } else {
       //alert("nooo");
+      handleLevelDown();
     }
   };
   const handleClick = (e) => {
     console.log(e);
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="p-4" style={{ marginTop: -40 }}>
+    <main className="flex min-h-screen flex-col items-center justify-between p-4">
+      <div className="p-4" style={{ marginTop: 18 }}>
         <center>
           <p className="justify-center items-center font-semibold">
             {" "}
+            {soundOn ? (
+              <>
+                {" "}
+                <VolumeUpIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => {
+                    setSoundOn(false);
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <VolumeOffIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => {
+                    setSoundOn(true);
+                  }}
+                />
+              </>
+            )}{" "}
             &#128151; 7 &#x1f48e; 208
           </p>
         </center>
@@ -121,7 +180,7 @@ export default function QuizComponent() {
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
             <div
-              className={`absolute top-0 left-0 h-full rounded p-2 text-white ${
+              className={`absolute top-0 left-0 text-center h-full rounded p-2 text-white ${
                 progress < 4 ? "bg-red-500" : "bg-blue-500"
               }`}
               style={{
@@ -146,7 +205,7 @@ export default function QuizComponent() {
                     : clickedOption !== option
                     ? "bg-white"
                     : "bg-red-500"
-                  : "bg-white"
+                  : "bg-gray-100"
               }`}
             >
               {option}
@@ -163,7 +222,7 @@ export default function QuizComponent() {
         <div className="mt-6">
           <button
             onClick={handleHint}
-            className="bg-yellow-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800"
+            className="bg-yellow-500 text-white w-full mt-4 p-2 rounded hover:bg-yellow-600"
           >
             show hint &#x1f48e; 100
           </button>

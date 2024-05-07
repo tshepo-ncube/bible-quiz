@@ -48,7 +48,7 @@ const LeaderboardItem = ({ rank, username, points, added }) => {
       badgeColor = "bg-blue-500";
   }
   return (
-    <div className="flex items-center w-full justify-between px-6 py-3 bg-gray-200 rounded-lg mb-2">
+    <div className="flex items-center w-full justify-between px-6 py-3 bg-gray-100 rounded-lg mb-2">
       <div className="flex items-center  space-x-3">
         <div
           className={` ${badgeColor} mr-14 text-white rounded-full w-10 h-10 flex items-center justify-center`}
