@@ -6,10 +6,22 @@ import Head from "next/head";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-export default function QuizComponent() {
+export default function QuizComponent({ question, newQuestion }) {
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
+  const [progress, setProgress] = useState(7);
+  const [showHint, setShowHint] = useState(false);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+  const newQuestionShow = () => {
+    console.log("Executing after 2 seconds");
+    setClickedOption(null);
+
+    newQuestion();
+    setIntervalId(id);
+    setProgress(7);
+  };
 
   const handleLevelUp = () => {
     setPlayLevelUp(true);
@@ -49,16 +61,13 @@ export default function QuizComponent() {
     level: "hard",
   };
 
-  const [progress, setProgress] = useState(7);
-  const [showHint, setShowHint] = useState(false);
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
-  const [intervalId, setIntervalId] = useState(null);
-
   useEffect(() => {
     const id = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress == 0) {
           handleTimeup();
+          // Wait for 2 seconds before executing the delayedFunction
+          setTimeout(newQuestionShow, 2000);
         }
         if (prevProgress <= 0) {
           clearInterval(id);
@@ -131,7 +140,7 @@ export default function QuizComponent() {
     console.log(option.target.name);
     console.log(option.target);
     // Check if the clicked option is correct
-    if (option.target.name === object.answer) {
+    if (option.target.name === question.answer) {
       //alert("yess");
       handleLevelUp();
       const button = option.target;
@@ -143,6 +152,9 @@ export default function QuizComponent() {
       //alert("nooo");
       handleLevelDown();
     }
+
+    // Wait for 2 seconds before executing the delayedFunction
+    setTimeout(newQuestionShow, 2000);
   };
   const handleClick = (e) => {
     console.log(e);
@@ -176,7 +188,7 @@ export default function QuizComponent() {
             &#128151; 7 &#x1f48e; 208
           </p>
         </center>
-        <h2 className="text-lg font-bold mb-2">{object.question}</h2>
+        <h2 className="text-lg font-bold mb-2">{question.question}</h2>
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
             <div
@@ -193,14 +205,14 @@ export default function QuizComponent() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
-          {object.options.map((option, index) => (
+          {question.options.map((option, index) => (
             <button
               key={index}
               name={option}
               onClick={handleButtonClick}
               className={`  text-black py-2 px-4 rounded w-full lg:w-auto  ${
                 clickedOption
-                  ? option === object.answer
+                  ? option === question.answer
                     ? "bg-green-500"
                     : clickedOption !== option
                     ? "bg-white"
@@ -214,7 +226,9 @@ export default function QuizComponent() {
         </div>
         {showHint ? (
           <>
-            <p className=" text-black w-full mt-2 p-2 rounded">{object.hint}</p>
+            <p className=" text-black w-full mt-2 p-2 rounded">
+              {question.hint}
+            </p>
           </>
         ) : (
           <></>
