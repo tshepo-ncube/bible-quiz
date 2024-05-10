@@ -232,7 +232,7 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
-          {Qoptions.map((option, index) => (
+          {question.options.map((option, index) => (
             <button
               key={index}
               name={option}
