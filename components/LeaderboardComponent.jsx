@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
+import {useRouter} from 'next/navigation';
 export default function LeaderboardComponent() {
+  const router = useRouter();
   const leaderboardData = [
     { rank: 1, username: "User1", points: 100, added: +10 },
     { rank: 2, username: "User2", points: 90, added: +10 },
@@ -22,7 +23,7 @@ export default function LeaderboardComponent() {
           added={item.added}
         />
       ))}
-      <button className="bg-green-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800">
+      <button className="bg-green-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800" onClick={()=> {router.push('/')}}>
         play
       </button>
       <button className="bg-pink-400 text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
