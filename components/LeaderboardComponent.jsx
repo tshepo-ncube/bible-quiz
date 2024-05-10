@@ -14,6 +14,7 @@ export default function LeaderboardComponent() {
   return (
     <div className="p-4">
       <h2 className="text-lg font-bold mb-4">Leaderboard</h2>
+      <p className='text-green-500 mt-2 mb-2'>The faster you answer, the more points you get!</p>
       {leaderboardData.map((item, index) => (
         <LeaderboardItem
           key={index}
