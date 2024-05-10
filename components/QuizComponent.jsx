@@ -73,7 +73,7 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
     }
   };
 
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4"]; // Example options
+  //const options = ["Option 1", "Option 2", "Option 3", "Option 4"]; // Example options
   const object = {
     question: "Who wrote the Book of Acts in the New Testament?",
     options: ["Luke", "Paul", "John", "Peter"],
