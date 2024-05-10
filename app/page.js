@@ -84,9 +84,9 @@ export default function Home() {
         <>
           {" "}
           {remain == 0 ? (
-            <>
+             <div className="mt-8">
               <Leaderboard />
-            </>
+            </div>
           ) : (
             <>
               {" "}
