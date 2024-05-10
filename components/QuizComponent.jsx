@@ -32,8 +32,8 @@ export default function QuizComponent({ question, newQuestion }) {
     setClickedOption(null);
 
     newQuestion();
-    setIntervalId(id);
-    setProgress(7);
+  
+    setProgress(7);  setIntervalId(id);
   };
 
   const handleLevelUp = () => {
