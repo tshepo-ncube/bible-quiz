@@ -26,7 +26,7 @@ export default function QuizComponent({ question, newQuestion }) {
   const [showHint, setShowHint] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
-  const [options, setOptions] = useState(null);
+  const [Qoptions, setOptions] = useState(null);
   const newQuestionShow = () => {
     console.log("Executing after 2 seconds");
     setClickedOption(null);
@@ -232,7 +232,7 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
-          {options.map((option, index) => (
+          {Qoptions.map((option, index) => (
             <button
               key={index}
               name={option}
