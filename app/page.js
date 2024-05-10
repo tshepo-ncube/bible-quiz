@@ -20,16 +20,7 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // Generate a random index from 0 to i
-        const j = Math.floor(Math.random() * (i + 1));
 
-        // Swap elements at indices i and j
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
 const firebaseConfig = {
   apiKey: "AIzaSyCMoOAhxxVqW8RkPNjoep0F6JeI0V89YKg",
   authDomain: "tebby-e78fc.firebaseapp.com",
@@ -45,6 +36,7 @@ const db = getFirestore(app);
 export default function Home() {
   const [easyQuestions, setEasyQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [remain, setRemain] = useState(3);
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "easy_level");
     try {
@@ -61,12 +53,7 @@ export default function Home() {
       setEasyQuestions(questionList);
       const randomIndex = Math.floor(Math.random() * questionList.length);
       //   return ;
-      let q = questionList[randomIndex];
-     
-      
- 
-      setCurrentQuestion({"hint":q.hint,"level":q.level,"options":shuffleArray(q.options),"question":q.question, "answer":q.answer});
-      
+      setCurrentQuestion(questionList[randomIndex]);
       // getRandomObject();
       console.log(questionList);
     } catch (error) {
@@ -81,24 +68,35 @@ export default function Home() {
   const getRandomObject = () => {
     const randomIndex = Math.floor(Math.random() * easyQuestions.length);
     //   return ;
-
-      let q =easyQuestions[randomIndex];
-     
-      
- 
-      setCurrentQuestion({"hint":q.hint,"level":q.level,"options":shuffleArray(q.options),"question":q.question, "answer":q.answer});
-      
-    //setCurrentQuestion(easyQuestions[randomIndex]);
+    setCurrentQuestion(easyQuestions[randomIndex]);
   };
+
+  const decrementQuestion = () => {
+    if(remain>0){
+      let r= remain -1 
+        setRemain(r);
+    }
+  
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
       {currentQuestion ? (
         <>
           {" "}
-          <QuizComponent
-            question={currentQuestion}
-            newQuestion={getRandomObject}
-          />
+          {remain == 0 ? (
+            <>
+              <Leaderboard />
+            </>
+          ) : (
+            <>
+              {" "}
+              <QuizComponent
+                question={currentQuestion}
+                decrementQuestion={decrementQuestion}
+                newQuestion={getRandomObject}
+              />
+            </>
+          )}
         </>
       ) : (
         <></>
