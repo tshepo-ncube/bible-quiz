@@ -28,12 +28,37 @@ export default function QuizComponent({ question, newQuestion }) {
   const [intervalId, setIntervalId] = useState(null);
   const [Qoptions, setOptions] = useState(null);
   const newQuestionShow = () => {
-    console.log("Executing after 2 seconds");
-    setClickedOption(null);
+    // console.log("Executing after 2 seconds");
+    // setClickedOption(null);
 
-    newQuestion();
+    // newQuestion();
   
-    setProgress(7);  setIntervalId(id);
+    // setProgress(7);  setIntervalId(id);
+      console.log("Executing after 2 seconds");
+  setClickedOption(null);
+
+  newQuestion();
+
+  // Clear the existing interval
+  clearInterval(intervalId);
+
+  // Start a new interval
+  const id = setInterval(() => {
+    setProgress((prevProgress) => {
+      if (prevProgress == 0) {
+        handleTimeup();
+        // Wait for 2 seconds before executing the delayedFunction
+        setTimeout(newQuestionShow, 2000);
+      }
+      if (prevProgress <= 0) {
+        clearInterval(id);
+        return 0;
+      }
+      return prevProgress - 1;
+    });
+  }, 1000);
+
+  setIntervalId(id);
   };
 
   const handleLevelUp = () => {
@@ -108,6 +133,29 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
 
     return () => clearInterval(id);
   }, []);
+
+    useEffect(() => {
+  setOptions(shuffleArray(question.options));
+  const id = setInterval(() => {
+    setProgress((prevProgress) => {
+      if (prevProgress == 0) {
+        handleTimeup();
+        // Wait for 2 seconds before executing the delayedFunction
+        setTimeout(newQuestionShow, 2000);
+      }
+      if (prevProgress <= 0) {
+        clearInterval(id);
+        return 0;
+      }
+      return prevProgress - 1;
+    });
+  }, 1000);
+
+  setIntervalId(id);
+
+  return () => clearInterval(id);
+}, [question, intervalId]); // Include intervalId in the dependency array
+
 
   const handleHint = () => {
     setShowHint(true);
