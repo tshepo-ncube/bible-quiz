@@ -6,6 +6,18 @@ import Head from "next/head";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        // Generate a random index from 0 to i
+        const j = Math.floor(Math.random() * (i + 1));
+
+        // Swap elements at indices i and j
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 export default function QuizComponent({ question, newQuestion }) {
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
@@ -14,6 +26,7 @@ export default function QuizComponent({ question, newQuestion }) {
   const [showHint, setShowHint] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [options, setOptions] = useState(null);
   const newQuestionShow = () => {
     console.log("Executing after 2 seconds");
     setClickedOption(null);
@@ -42,6 +55,14 @@ export default function QuizComponent({ question, newQuestion }) {
     }
   };
 
+  
+
+// Example usage:
+const myArray = [1, 2, 3, 4, 5];
+shuffleArray(myArray);
+console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3, 4, 5]
+
+
   const handleTimeup = () => {
     setPlayLevelUp(true);
     // Play the sound
@@ -62,6 +83,12 @@ export default function QuizComponent({ question, newQuestion }) {
   };
 
   useEffect(() => {
+    setOptions(shuffleArray(question.options));
+    
+  }, [question]);
+  
+  useEffect(() => {
+    setOptions(shuffleArray(question.options));
     const id = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress == 0) {
@@ -205,7 +232,7 @@ export default function QuizComponent({ question, newQuestion }) {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
-          {question.options.map((option, index) => (
+          {options.map((option, index) => (
             <button
               key={index}
               name={option}
