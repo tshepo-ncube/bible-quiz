@@ -18,7 +18,7 @@ function shuffleArray(array) {
     return array;
 }
 
-export default function QuizComponent({ question, newQuestion }) {
+export default function QuizComponent({ question, newQuestion,decrementQuestion }) {
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -36,7 +36,7 @@ export default function QuizComponent({ question, newQuestion }) {
     // setProgress(7);  setIntervalId(id);
       console.log("Executing after 2 seconds");
   setClickedOption(null);
-
+decrementQuestion();
   newQuestion();
     // Clear the existing interval
   clearInterval(intervalId);
