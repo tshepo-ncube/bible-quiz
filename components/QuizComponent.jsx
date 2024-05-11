@@ -52,6 +52,7 @@ export default function QuizComponent({
       setProgress((prevProgress) => {
         if (prevProgress == 0) {
           handleTimeup();
+          decrementQuestion();
           // Wait for 2 seconds before executing the delayedFunction
           setTimeout(newQuestionShow, 2000);
         }
@@ -123,6 +124,7 @@ export default function QuizComponent({
           setTimeout(newQuestionShow, 2000);
         }
         if (prevProgress <= 0) {
+          setCurrentPoints(currentPoints - 40);
           clearInterval(id);
           return 0;
         }

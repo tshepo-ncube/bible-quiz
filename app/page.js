@@ -4,6 +4,7 @@ import "./globals.css"; // Import CSS for star animations
 import LeaderboardComponent from "@/components/LeaderboardComponent";
 import Leaderboard from "@/components/LeaderboardComponent";
 import QuizComponent from "@/components/QuizComponent";
+import { CircularProgress } from "@mui/material";
 import ShopComponent from "@/components/ShopComponent";
 import React, { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
@@ -37,6 +38,7 @@ export default function Home() {
   const [easyQuestions, setEasyQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [remain, setRemain] = useState(5);
+  const [loading, setLoading] = useState(true);
   const [currentPoints, setCurrentPoints] = useState(0);
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "easy_level");
@@ -64,6 +66,7 @@ export default function Home() {
 
   useEffect(() => {
     getEasyQuestions();
+    setLoading(false);
   }, []);
 
   const getRandomObject = () => {
@@ -80,28 +83,35 @@ export default function Home() {
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      {currentQuestion ? (
+      {loading ? (
+        <center>
+          <CircularProgress style={{ width: 150, height: 150 }} />
+        </center>
+      ) : (
         <>
-          {" "}
-          {remain == 0 ? (
-            <div className="mt-8">
-              <Leaderboard currentPoints={currentPoints} />
-            </div>
-          ) : (
+          {currentQuestion ? (
             <>
-              {" "}
-              <QuizComponent
-                question={currentQuestion}
-                decrementQuestion={decrementQuestion}
-                newQuestion={getRandomObject}
-                currentPoints={currentPoints}
-                setCurrentPoints={setCurrentPoints}
-              />
+              {remain == 0 ? (
+                <div className="mt-8">
+                  <Leaderboard currentPoints={currentPoints} />
+                </div>
+              ) : (
+                <>
+                  {" "}
+                  <QuizComponent
+                    question={currentQuestion}
+                    decrementQuestion={decrementQuestion}
+                    newQuestion={getRandomObject}
+                    currentPoints={currentPoints}
+                    setCurrentPoints={setCurrentPoints}
+                  />
+                </>
+              )}
             </>
+          ) : (
+            <></>
           )}
         </>
-      ) : (
-        <></>
       )}
     </main>
   );
