@@ -269,7 +269,7 @@ export default function QuizComponent({
             &#128151; 7 &#x1f48e; 208
           </p>
         </center>
-        <h1>{remain}</h1>
+        <h1 className="text-black">{remain}</h1>
         <h2 className="text-lg font-bold mb-2">{question.question}</h2>
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
