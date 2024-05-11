@@ -115,27 +115,6 @@ export default function LeaderboardComponent({ currentPoints }) {
       <h2 className="text-lg font-bold mb-4">Leaderboard</h2>
       <center>
         <p className="justify-center items-center font-semibold">
-          {" "}
-          {soundOn ? (
-            <>
-              {" "}
-              <VolumeUpIcon
-                sx={{ fontSize: 30 }}
-                onClick={() => {
-                  setSoundOn(false);
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <VolumeOffIcon
-                sx={{ fontSize: 30 }}
-                onClick={() => {
-                  setSoundOn(true);
-                }}
-              />
-            </>
-          )}{" "}
           &#128151; 7 &#x1f48e; 208
         </p>
       </center>
