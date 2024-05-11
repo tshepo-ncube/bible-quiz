@@ -54,7 +54,7 @@ export default function QuizComponent({
           handleTimeup();
           decrementQuestion();
           // Wait for 2 seconds before executing the delayedFunction
-          setTimeout(newQuestionShow, 6000);
+          setTimeout(newQuestionShow, 2000);
         }
         if (prevProgress <= 0) {
           clearInterval(id);
