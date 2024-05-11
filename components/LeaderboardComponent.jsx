@@ -118,6 +118,14 @@ export default function LeaderboardComponent({ currentPoints }) {
           &#128151; 7 &#x1f48e; 208
         </p>
       </center>
+      <button
+        className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-800"
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        play
+      </button>
       <p className="text-green-500 mt-2 mb-2">
         The faster you answer, the more points you get!
       </p>
@@ -130,14 +138,7 @@ export default function LeaderboardComponent({ currentPoints }) {
           added={item.added}
         />
       ))}
-      <button
-        className="bg-green-500 text-white w-full mt-4 p-2 rounded hover:bg-green-800"
-        onClick={() => {
-          router.push("/");
-        }}
-      >
-        play
-      </button>
+
       <button className="bg-pink-400 text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
         &#128151; new life &#x1f48e; 200
       </button>
