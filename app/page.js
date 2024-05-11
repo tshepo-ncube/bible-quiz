@@ -36,7 +36,7 @@ const db = getFirestore(app);
 export default function Home() {
   const [easyQuestions, setEasyQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [remain, setRemain] = useState(3);
+  const [remain, setRemain] = useState(5);
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "easy_level");
     try {
@@ -72,19 +72,18 @@ export default function Home() {
   };
 
   const decrementQuestion = () => {
-    if(remain>0){
-      let r= remain -1 
-        setRemain(r);
+    if (remain > 0) {
+      let r = remain - 1;
+      setRemain(r);
     }
-  
-  }
+  };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
       {currentQuestion ? (
         <>
           {" "}
           {remain == 0 ? (
-             <div className="mt-8">
+            <div className="mt-8">
               <Leaderboard />
             </div>
           ) : (
