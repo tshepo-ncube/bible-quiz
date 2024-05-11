@@ -85,7 +85,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
       {loading ? (
         <center>
-          <CircularProgress style={{ width: 150, height: 150 }} />
+          <CircularProgress
+            style={{ marginTop: 300, width: 150, height: 150 }}
+          />
         </center>
       ) : (
         <>
