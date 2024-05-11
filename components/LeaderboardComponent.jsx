@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 export default function LeaderboardComponent({ currentPoints }) {
   const router = useRouter();
 
