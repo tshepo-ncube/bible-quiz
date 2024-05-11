@@ -208,7 +208,7 @@ const LeaderboardItem = ({ rank, username, points, added }) => {
               >
                 {added < 0 ? <>{added}</> : <>+{added}</>}
               </p>
-              <div className="bg-green-500  text-white rounded-full w-10 h-10 flex items-center justify-center">
+              <div className="bg-green-500  text-white rounded w-10 h-10 flex items-center justify-center">
                 {points}
               </div>
             </div>
