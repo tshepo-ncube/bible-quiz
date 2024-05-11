@@ -24,6 +24,7 @@ export default function QuizComponent({
   decrementQuestion,
   currentPoints,
   setCurrentPoints,
+  remain,
 }) {
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
@@ -242,6 +243,7 @@ export default function QuizComponent({
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <div className="p-4" style={{ marginTop: 18 }}>
+        <h1>{remain}</h1>
         <center>
           <p className="justify-center items-center font-semibold">
             {" "}
