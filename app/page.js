@@ -37,7 +37,7 @@ const db = getFirestore(app);
 export default function Home() {
   const [easyQuestions, setEasyQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [remain, setRemain] = useState(5);
+  const [remain, setRemain] = useState(4);
   const [loading, setLoading] = useState(true);
   const [currentPoints, setCurrentPoints] = useState(0);
   const [play, setPlay] = useState(true);
@@ -84,6 +84,7 @@ export default function Home() {
 
     if (remain == 0) {
       setPlay(false);
+      setRemain(4);
     }
   };
   return (
