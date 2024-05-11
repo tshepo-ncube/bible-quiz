@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-export default function LeaderboardComponent() {
+export default function LeaderboardComponent({ currentPoints }) {
   const router = useRouter();
   const leaderboardData = [
     { rank: 1, username: "User1", points: 100, added: +10 },
-    { rank: 2, username: "you", points: 90, added: +10 },
+    { rank: 2, username: "you", points: 90, added: currentPoints },
     { rank: 3, username: "User3", points: 80, added: +10 },
     { rank: 4, username: "User2", points: 90, added: -10 },
     { rank: 5, username: "User3", points: 80, added: -10 },

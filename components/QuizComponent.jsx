@@ -8,17 +8,23 @@ import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // Generate a random index from 0 to i
-        const j = Math.floor(Math.random() * (i + 1));
+  for (let i = array.length - 1; i > 0; i--) {
+    // Generate a random index from 0 to i
+    const j = Math.floor(Math.random() * (i + 1));
 
-        // Swap elements at indices i and j
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+    // Swap elements at indices i and j
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
-export default function QuizComponent({ question, newQuestion,decrementQuestion }) {
+export default function QuizComponent({
+  question,
+  newQuestion,
+  decrementQuestion,
+  currentPoints,
+  setCurrentPoints,
+}) {
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -34,30 +40,30 @@ export default function QuizComponent({ question, newQuestion,decrementQuestion 
     // newQuestion();
 
     // setProgress(7);  setIntervalId(id);
-      console.log("Executing after 2 seconds");
-  setClickedOption(null);
-decrementQuestion();
-  newQuestion();
+    console.log("Executing after 2 seconds");
+    setClickedOption(null);
+    decrementQuestion();
+    newQuestion();
     // Clear the existing interval
-  clearInterval(intervalId);
-  setProgress(7);
-  // Start a new interval
-  const id = setInterval(() => {
-    setProgress((prevProgress) => {
-      if (prevProgress == 0) {
-        handleTimeup();
-        // Wait for 2 seconds before executing the delayedFunction
-        setTimeout(newQuestionShow, 2000);
-      }
-      if (prevProgress <= 0) {
-        clearInterval(id);
-        return 0;
-            }
-       return prevProgress - 1;
-    });
-  }, 1000);
+    clearInterval(intervalId);
+    setProgress(7);
+    // Start a new interval
+    const id = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress == 0) {
+          handleTimeup();
+          // Wait for 2 seconds before executing the delayedFunction
+          setTimeout(newQuestionShow, 2000);
+        }
+        if (prevProgress <= 0) {
+          clearInterval(id);
+          return 0;
+        }
+        return prevProgress - 1;
+      });
+    }, 1000);
 
-  setIntervalId(id);
+    setIntervalId(id);
   };
 
   const handleLevelUp = () => {
@@ -79,13 +85,10 @@ decrementQuestion();
     }
   };
 
-
-
-// Example usage:
-const myArray = [1, 2, 3, 4, 5];
-shuffleArray(myArray);
-console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3, 4, 5]
-
+  // Example usage:
+  const myArray = [1, 2, 3, 4, 5];
+  shuffleArray(myArray);
+  console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3, 4, 5]
 
   const handleTimeup = () => {
     setPlayLevelUp(true);
@@ -94,7 +97,7 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
     if (soundOn) {
       const audio = new Audio("/error_sound.mp3");
       audio.play();
-        }
+    }
   };
 
   //const options = ["Option 1", "Option 2", "Option 3", "Option 4"]; // Example options
@@ -108,10 +111,9 @@ console.log(myArray); // Output will be a shuffled version of the array [1, 2, 3
 
   useEffect(() => {
     setOptions(shuffleArray(question.options));
-
   }, [question]);
 
-useEffect(() => {
+  useEffect(() => {
     setOptions(shuffleArray(question.options));
     const id = setInterval(() => {
       setProgress((prevProgress) => {
@@ -134,33 +136,32 @@ useEffect(() => {
     getEasyQuestions();
   }, []);
 
-//     useEffect(() => {
-//   setOptions(shuffleArray(question.options));
-//   const id = setInterval(() => {
-//     setProgress((prevProgress) => {
-//       if (prevProgress == 0) {
-//         handleTimeup();
-//         // Wait for 2 seconds before executing the delayedFunction
-//         setTimeout(newQuestionShow, 2000);
-//       }
-//       if (prevProgress <= 0) {
-//         clearInterval(id);
-//         return 0;
-//       }
-//       return prevProgress - 1;
-//     });
-//   }, 1000);
+  //     useEffect(() => {
+  //   setOptions(shuffleArray(question.options));
+  //   const id = setInterval(() => {
+  //     setProgress((prevProgress) => {
+  //       if (prevProgress == 0) {
+  //         handleTimeup();
+  //         // Wait for 2 seconds before executing the delayedFunction
+  //         setTimeout(newQuestionShow, 2000);
+  //       }
+  //       if (prevProgress <= 0) {
+  //         clearInterval(id);
+  //         return 0;
+  //       }
+  //       return prevProgress - 1;
+  //     });
+  //   }, 1000);
 
-//   setIntervalId(id);
+  //   setIntervalId(id);
 
-//   return () => clearInterval(id);
-// }, [question, intervalId]); // Include intervalId in the dependency array
-
+  //   return () => clearInterval(id);
+  // }, [question, intervalId]); // Include intervalId in the dependency array
 
   const handleHint = () => {
     setShowHint(true);
-     };
- const explode = (x, y) => {
+  };
+  const explode = (x, y) => {
     const particles = 15;
     const explosion = document.createElement("div");
     explosion.classList.add("explosion");
@@ -191,9 +192,8 @@ useEffect(() => {
           explosion.remove();
         });
       }
-
-     }
-   };
+    }
+  };
 
   const rand = (min, max) => {
     return Math.floor(Math.random() * (max + 1)) + min;
@@ -218,6 +218,7 @@ useEffect(() => {
     if (option.target.name === question.answer) {
       //alert("yess");
       handleLevelUp();
+      setCurrentPoints(currentPoints + 40);
       const button = option.target;
       const buttonRect = button.getBoundingClientRect();
       const x = buttonRect.left + buttonRect.width / 2;
@@ -225,6 +226,7 @@ useEffect(() => {
       explode(x, y);
     } else {
       //alert("nooo");
+      setCurrentPoints(currentPoints - 40);
       handleLevelDown();
     }
 
@@ -326,6 +328,6 @@ useEffect(() => {
           </button>
         </div>
       </div>
-      </main>
+    </main>
   );
 }

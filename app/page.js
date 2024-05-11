@@ -37,6 +37,7 @@ export default function Home() {
   const [easyQuestions, setEasyQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [remain, setRemain] = useState(5);
+  const [currentPoints, setCurrentPoints] = useState(0);
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "easy_level");
     try {
@@ -84,7 +85,7 @@ export default function Home() {
           {" "}
           {remain == 0 ? (
             <div className="mt-8">
-              <Leaderboard />
+              <Leaderboard currentPoints={currentPoints} />
             </div>
           ) : (
             <>
@@ -93,6 +94,8 @@ export default function Home() {
                 question={currentQuestion}
                 decrementQuestion={decrementQuestion}
                 newQuestion={getRandomObject}
+                currentPoints={currentPoints}
+                setCurrentPoints={setCurrentPoints}
               />
             </>
           )}
