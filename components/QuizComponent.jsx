@@ -242,8 +242,7 @@ export default function QuizComponent({
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <div className="p-4" style={{ marginTop: 38 }}>
-        <h1>{remain}</h1>
+      <div className="p-4" style={{ marginTop: 18 }}>
         <center>
           <p className="justify-center items-center font-semibold">
             {" "}
@@ -270,6 +269,7 @@ export default function QuizComponent({
             &#128151; 7 &#x1f48e; 208
           </p>
         </center>
+        <h1>{remain}</h1>
         <h2 className="text-lg font-bold mb-2">{question.question}</h2>
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
