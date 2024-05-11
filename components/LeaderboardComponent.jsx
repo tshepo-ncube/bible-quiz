@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-export default function LeaderboardComponent({ currentPoints }) {
+export default function LeaderboardComponent({ currentPoints, setPlay }) {
   const router = useRouter();
 
   // const leaderboardData = [
@@ -122,6 +122,7 @@ export default function LeaderboardComponent({ currentPoints }) {
         className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-800"
         onClick={() => {
           router.push("/");
+          setPlay(true);
         }}
       >
         play

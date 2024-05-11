@@ -40,6 +40,7 @@ export default function Home() {
   const [remain, setRemain] = useState(5);
   const [loading, setLoading] = useState(true);
   const [currentPoints, setCurrentPoints] = useState(0);
+  const [play, setPlay] = useState(true);
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "easy_level");
     try {
@@ -66,9 +67,7 @@ export default function Home() {
 
   useEffect(() => {
     getEasyQuestions();
-    setTimeout(() => {
-      setLoading(false);
-    }, 6000);
+    setLoading(false);
   }, []);
 
   const getRandomObject = () => {
@@ -81,6 +80,10 @@ export default function Home() {
     if (remain > 0) {
       let r = remain - 1;
       setRemain(r);
+    }
+
+    if (remain == 0) {
+      setPlay(false);
     }
   };
   return (
@@ -95,9 +98,12 @@ export default function Home() {
         <>
           {currentQuestion ? (
             <>
-              {remain == 0 ? (
+              {play ? (
                 <div className="mt-8">
-                  <Leaderboard currentPoints={currentPoints} />
+                  <Leaderboard
+                    currentPoints={currentPoints}
+                    setPlay={setPlay}
+                  />
                 </div>
               ) : (
                 <>
@@ -105,6 +111,7 @@ export default function Home() {
                   <QuizComponent
                     question={currentQuestion}
                     decrementQuestion={decrementQuestion}
+                    remain={remain}
                     newQuestion={getRandomObject}
                     currentPoints={currentPoints}
                     setCurrentPoints={setCurrentPoints}
