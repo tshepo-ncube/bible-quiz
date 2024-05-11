@@ -98,7 +98,7 @@ export default function Home() {
         <>
           {currentQuestion ? (
             <>
-              {play ? (
+              {!play ? (
                 <div className="mt-8">
                   <Leaderboard
                     currentPoints={currentPoints}
