@@ -43,11 +43,12 @@ export default function QuizComponent({
     // setProgress(7);  setIntervalId(id);
     console.log("Executing after 2 seconds");
     setClickedOption(null);
-    decrementQuestion();
+    //decrementQuestion();
     newQuestion();
     // Clear the existing interval
     clearInterval(intervalId);
     setProgress(7);
+    decrementQuestion();
     // Start a new interval
     const id = setInterval(() => {
       setProgress((prevProgress) => {
