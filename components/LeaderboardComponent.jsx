@@ -97,8 +97,11 @@ export default function LeaderboardComponent({ currentPoints }) {
 
     //console.log(topSixItems);
   } else {
+    let top3 = leaderboardData.slice(0, 3);
     // Get three items above and three items below "You"
-    leaderboardData = leaderboardData.slice(Math.max(index - 3, 0), index + 4);
+    leaderboardData = leaderboardData.slice(Math.max(index - 1, 0), index + 2);
+
+    top3.push(...leaderboardData);
   }
 
   // console.log(itemsAboveAndBelow);
