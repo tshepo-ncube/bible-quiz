@@ -150,7 +150,7 @@ const LeaderboardItem = ({ rank, username, points, added }) => {
   }
   return (
     <>
-      {username === "you" ? (
+      {username === "You" ? (
         <>
           <div className="flex items-center w-full justify-between px-6 py-3 bg-blue-200 rounded-lg mb-2">
             <div className="flex items-center  space-x-3">
