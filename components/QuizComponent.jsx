@@ -120,13 +120,11 @@ export default function QuizComponent({
     setOptions(shuffleArray(question.options));
     const id = setInterval(() => {
       setProgress((prevProgress) => {
-        if (prevProgress == 0) {
-          handleTimeup();
-          // Wait for 2 seconds before executing the delayedFunction
-          setTimeout(newQuestionShow, 2000);
-        }
         if (prevProgress <= 0) {
+          handleTimeup();
           setCurrentPoints(currentPoints - 40);
+          decrementQuestion();
+          setTimeout(newQuestionShow, 2000);
           clearInterval(id);
           return 0;
         }
