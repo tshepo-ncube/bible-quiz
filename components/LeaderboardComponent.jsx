@@ -102,6 +102,7 @@ export default function LeaderboardComponent({ currentPoints }) {
     leaderboardData = leaderboardData.slice(Math.max(index - 1, 0), index + 2);
 
     top3.push(...leaderboardData);
+    leaderboardData = top3;
   }
 
   // console.log(itemsAboveAndBelow);
