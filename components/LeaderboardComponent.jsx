@@ -71,7 +71,7 @@ export default function LeaderboardComponent({ currentPoints }) {
   });
   dataWithRandomPoints.push({
     username: "You",
-    points: adjustedPoints,
+    points: 340,
     added: currentPoints,
   });
 
@@ -81,12 +81,27 @@ export default function LeaderboardComponent({ currentPoints }) {
   newList.sort((a, b) => b.points - a.points);
 
   // Assign ranks after sorting
-  const leaderboardData = newList.map((item, index) => ({
+  let leaderboardData = newList.map((item, index) => ({
     ...item,
     rank: index + 1,
   }));
 
   console.log(leaderboardData);
+
+  // Find the index of the entry with username "You"
+  const index = leaderboardData.findIndex((item) => item.username === "You");
+
+  if (index < 6) {
+    // Getting the top 6 items
+    leaderboardData = leaderboardData.slice(0, 6);
+
+    //console.log(topSixItems);
+  } else {
+    // Get three items above and three items below "You"
+    leaderboardData = leaderboardData.slice(Math.max(index - 3, 0), index + 4);
+  }
+
+  // console.log(itemsAboveAndBelow);
 
   return (
     <div className="p-4">
