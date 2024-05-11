@@ -218,7 +218,7 @@ export default function QuizComponent({
     if (option.target.name === question.answer) {
       //alert("yess");
       handleLevelUp();
-      setCurrentPoints(currentPoints + 40);
+      setCurrentPoints((currentPoints + 40) * progress);
       const button = option.target;
       const buttonRect = button.getBoundingClientRect();
       const x = buttonRect.left + buttonRect.width / 2;
