@@ -59,10 +59,6 @@ export default function Home() {
       setCurrentQuestion(questionList[randomIndex]);
       // getRandomObject();
       console.log(questionList);
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 2500);
     } catch (error) {
       console.error("Error getting documents: ", error);
     }
@@ -70,6 +66,9 @@ export default function Home() {
 
   useEffect(() => {
     getEasyQuestions();
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, []);
 
   const getRandomObject = () => {
