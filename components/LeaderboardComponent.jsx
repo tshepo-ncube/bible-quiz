@@ -61,7 +61,7 @@ export default function LeaderboardComponent({ currentPoints }) {
   const dataWithRandomPoints = emailList.map((email) => {
     const points = getRandomInt(-300, 6000);
     const adjustedPoints = Math.round(points / 40) * 40; // Ensure points are in increments of 40
-    const added = getRandomInt(-200, 200);
+    const added = getRandomInt(-200, 1230);
     const adjustedAdded = Math.round(added / 40) * 40; // Ensure added points are in increments of 40
     return {
       username: email,
