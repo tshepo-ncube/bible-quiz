@@ -318,7 +318,7 @@ export default function QuizComponent({
         <div className="mt-6">
           <button
             onClick={handleHint}
-            className="bg-yellow-500 text-white w-full mt-4 p-2 rounded hover:bg-yellow-600"
+            className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
           >
             show hint &#x1f48e; 100
           </button>
