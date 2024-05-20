@@ -222,7 +222,7 @@ export default function QuizComponent({
       //alert("yess");
       handleLevelUp();
       let mediate = progress / 7;
-      setCurrentPoints(Math.floor((currentPoints + 40) * mediate));
+      setCurrentPoints(Math.floor(currentPoints + 40 + progress));
       const button = option.target;
       const buttonRect = button.getBoundingClientRect();
       const x = buttonRect.left + buttonRect.width / 2;
