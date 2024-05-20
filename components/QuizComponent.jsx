@@ -221,7 +221,7 @@ export default function QuizComponent({
     if (option.target.name === question.answer) {
       //alert("yess");
       handleLevelUp();
-      setCurrentPoints((currentPoints + 40) * progress);
+      setCurrentPoints(((currentPoints + 40) * progress) / 7);
       const button = option.target;
       const buttonRect = button.getBoundingClientRect();
       const x = buttonRect.left + buttonRect.width / 2;
@@ -269,7 +269,7 @@ export default function QuizComponent({
             &#128151; 7 &#x1f48e; 208
           </p>
         </center>
-        <h1 className="text-black">{remain}</h1>
+
         <h2 className="text-lg font-bold mb-2">{question.question}</h2>
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
