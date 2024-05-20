@@ -39,7 +39,7 @@ export default function QuizComponent({
     // setClickedOption(null);
 
     // newQuestion();
-
+    setShowHint(false);
     // setProgress(7);  setIntervalId(id);
     console.log("Executing after 2 seconds");
     setClickedOption(null);
