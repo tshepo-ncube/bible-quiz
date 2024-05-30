@@ -54,15 +54,17 @@ export default function QuizComponent({
       setProgress((prevProgress) => {
         if (prevProgress == 0) {
           handleTimeup();
-
-          // Wait for 2 seconds before executing the delayedFunction
-          setTimeout(newQuestionShow, 2000);
-        }
-        if (prevProgress <= 0) {
           decrementQuestion();
+          // Wait for 2 seconds before executing the delayedFunction
           clearInterval(id);
+          //setTimeout(newQuestionShow, 2000);
           return 0;
         }
+        // if (prevProgress <= 0) {
+        //   decrementQuestion();
+        //   clearInterval(id);
+        //   return 0;
+        // }
         return prevProgress - 1;
       });
     }, 1000);
@@ -113,9 +115,9 @@ export default function QuizComponent({
     level: "hard",
   };
 
-  useEffect(() => {
-    setOptions(shuffleArray(question.options));
-  }, [question]);
+  // useEffect(() => {
+  //   setOptions(shuffleArray(question.options));
+  // }, [question]);
 
   useEffect(() => {
     setOptions(shuffleArray(question.options));
@@ -125,7 +127,7 @@ export default function QuizComponent({
           handleTimeup();
           setCurrentPoints(currentPoints - 40);
           decrementQuestion();
-          setTimeout(newQuestionShow, 2000);
+          //setTimeout(newQuestionShow, 2000);
           clearInterval(id);
           return 0;
         }
@@ -220,18 +222,24 @@ export default function QuizComponent({
     // Check if the clicked option is correct
     if (option.target.name === question.answer) {
       //alert("yess");
-      handleLevelUp();
-      let mediate = progress / 7;
-      setCurrentPoints(Math.floor(currentPoints + 40 + progress));
-      const button = option.target;
-      const buttonRect = button.getBoundingClientRect();
-      const x = buttonRect.left + buttonRect.width / 2;
-      const y = buttonRect.top + buttonRect.height / 2;
-      explode(x, y);
+
+      if (progress !== 0) {
+        handleLevelUp();
+        let mediate = progress / 7;
+        setCurrentPoints(Math.floor(currentPoints + 40 + progress));
+        const button = option.target;
+        const buttonRect = button.getBoundingClientRect();
+        const x = buttonRect.left + buttonRect.width / 2;
+        const y = buttonRect.top + buttonRect.height / 2;
+        explode(x, y);
+      }
     } else {
       //alert("nooo");
-      setCurrentPoints(currentPoints - 40);
-      handleLevelDown();
+
+      if (progress !== 0) {
+        setCurrentPoints(currentPoints - 40);
+        handleLevelDown();
+      }
     }
 
     // Wait for 2 seconds before executing the delayedFunction
@@ -267,11 +275,21 @@ export default function QuizComponent({
                 />
               </>
             )}{" "}
-            &#128151; 7 &#x1f48e; 208
+            &#128151; 3 &#x1f48e; 0
           </p>
         </center>
 
         <h2 className="text-lg font-bold mb-2">{question.question}</h2>
+        {/* <h2 className="text-sm font-semi-bold mb-2">{remain}</h2> */}
+        {progress == 0 ? (
+          <>
+            <p className="text-md mb-2 text-red-500">
+              Time is up! Please Select An Option to Continue
+            </p>
+          </>
+        ) : (
+          <></>
+        )}
         <div className="p-4">
           <div className="relative h-10 bg-gray-800 rounded ">
             <div
