@@ -26,6 +26,18 @@ export default function QuizComponent({
   setCurrentPoints,
   remain,
 }) {
+  const event = ({ action, category, label, value }) => {
+    window.gtag("event", action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  };
+
+  // const addToCart = () => {
+
+  // };
+
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -57,6 +69,12 @@ export default function QuizComponent({
           decrementQuestion();
           // Wait for 2 seconds before executing the delayedFunction
           clearInterval(id);
+          event({
+            action: "Time Up",
+            category: "Quiz",
+            label: question.question,
+            value: "Time Up",
+          });
           //setTimeout(newQuestionShow, 2000);
           return 0;
         }
@@ -127,6 +145,12 @@ export default function QuizComponent({
           handleTimeup();
           setCurrentPoints(currentPoints - 40);
           decrementQuestion();
+          event({
+            action: "Time Up",
+            category: "Quiz",
+            label: question.question,
+            value: "Time Up",
+          });
           //setTimeout(newQuestionShow, 2000);
           clearInterval(id);
           return 0;
@@ -219,11 +243,25 @@ export default function QuizComponent({
     stopProgress();
     console.log(option.target.name);
     console.log(option.target);
+
+    event({
+      action: "Clicked Quiz Option",
+      category: "Quiz",
+      label: "Quiz Option Clicked",
+      value: option.target.name,
+    });
+
     // Check if the clicked option is correct
     if (option.target.name === question.answer) {
       //alert("yess");
 
       if (progress !== 0) {
+        event({
+          action: "Correct Option Clicked",
+          category: "Quiz",
+          label: "Correct Option Clicked",
+          value: option.target.name,
+        });
         handleLevelUp();
         let mediate = progress / 7;
         setCurrentPoints(Math.floor(currentPoints + 40 + progress));
@@ -237,6 +275,12 @@ export default function QuizComponent({
       //alert("nooo");
 
       if (progress !== 0) {
+        event({
+          action: "Incorrect Option Clicked",
+          category: "Quiz",
+          label: "Incorrect Option Clicked",
+          value: option.target.name,
+        });
         setCurrentPoints(currentPoints - 40);
         handleLevelDown();
       }
