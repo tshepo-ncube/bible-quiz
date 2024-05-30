@@ -30,4 +30,6 @@ export default class QuizRetrieval {
   static DoesLocalStorageHaveEnoughQuizes = () => {
     return true;
   };
+
+
 }

@@ -187,9 +187,9 @@ const Navbar = ({ isHome }) => {
           <li className="p-4">
             <Link href="/leaderboard">Leaderboard</Link>
           </li>
-          <li className="p-4">
+          {/* <li className="p-4">
             <Link href="/shop">Shop</Link>
-          </li>
+          </li> */}
           {/* <li className="p-4">
             <Link href="/blog">Blog</Link>
           </li> */}
@@ -197,7 +197,7 @@ const Navbar = ({ isHome }) => {
           {/* <li className="p-4">
             <Link href="/about">About</Link>
           </li> */}
-
+          {/* 
           <li className="p-4">
             {signedIn ? (
               <>
@@ -210,7 +210,7 @@ const Navbar = ({ isHome }) => {
                 <Link href="/sign-in">Sign In</Link>
               </>
             )}
-          </li>
+          </li> */}
 
           {/* <li className='p-4'>
             <Link href='/work'>Work</Link>
@@ -241,7 +241,7 @@ const Navbar = ({ isHome }) => {
               onClick={handleNav}
               className="p-4 text-4xl hover:text-gray-500"
             >
-              <Link href="/">Create Quiz</Link>
+              <Link href="/">Play</Link>
             </li>
             <hr style={{ marginTop: 8 }} />
 
@@ -250,7 +250,7 @@ const Navbar = ({ isHome }) => {
                 Chat
               </Link>
             </li> */}
-            <hr style={{ marginTop: 8 }} />
+            {/* <hr style={{ marginTop: 8 }} /> */}
 
             {user ? (
               <>
@@ -258,9 +258,9 @@ const Navbar = ({ isHome }) => {
                   <Link href="/goals">My Goals</Link>
                 </li>
                 <hr style={{ marginTop: 8 }} /> */}
-                <li className="p-4 text-4xl hover:text-gray-500">
+                {/* <li className="p-4 text-4xl hover:text-gray-500">
                   <Link href="/profile">Profile</Link>
-                </li>
+                </li> */}
               </>
             ) : (
               <>
@@ -275,22 +275,29 @@ const Navbar = ({ isHome }) => {
               onClick={handleNav}
               className="p-4 text-4xl hover:text-gray-500"
             >
-              <Link href="/blog">Blog</Link>
+              <Link href="/leaderboard">Leaderboard</Link>
             </li>
             <hr style={{ marginTop: 8 }} />
+            {/* <li
+              onClick={handleNav}
+              className="p-4 text-4xl hover:text-gray-500"
+            >
+              <Link href="/shop">Shop</Link>
+            </li>
+            <hr style={{ marginTop: 8 }} /> */}
             {/* <li className="p-4 text-4xl hover:text-gray-500">
               <Link href="/about">About</Link>
             </li>
             <hr style={{ marginTop: 8 }} /> */}
 
-            <li
+            {/* <li
               onClick={handleNav}
               className="p-4 text-4xl hover:text-gray-500"
             >
               <Link href="/pricing">Pricing</Link>
             </li>
-            <hr style={{ marginTop: 8 }} />
-            <li className="p-4 text-4xl hover:text-gray-500">
+            <hr style={{ marginTop: 8 }} /> */}
+            {/* <li className="p-4 text-4xl hover:text-gray-500">
               {signedIn ? (
                 <>
                   <Link href="/sign-in" onClick={handleLogout}>
@@ -303,7 +310,7 @@ const Navbar = ({ isHome }) => {
                 </>
               )}
             </li>
-            <hr style={{ marginTop: 8 }} />
+            <hr style={{ marginTop: 8 }} /> */}
 
             {/* <li className='p-4'>
                 <Link href='/chat'>Chat</Link>
