@@ -379,7 +379,14 @@ export default function QuizComponent({
           <></>
         )}
         <div className="mt-6">
-          <button
+          <a
+            href="https://forms.gle/jxjnh5uFe1RksaREA"
+            target="_blank"
+            className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-600"
+          >
+            Feeback on the game
+          </a>
+          {/* <button
             onClick={handleHint}
             className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
           >
@@ -392,7 +399,7 @@ export default function QuizComponent({
 
           <button className="bg-blue-400 text-white w-full mt-4 p-2 rounded hover:bg-blue-800">
             skip &#x1f48e; 98
-          </button>
+          </button> */}
         </div>
       </div>
     </main>
