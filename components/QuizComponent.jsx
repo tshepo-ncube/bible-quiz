@@ -357,7 +357,7 @@ export default function QuizComponent({
               key={index}
               name={option}
               onClick={handleButtonClick}
-              className={`  text-black py-2 px-4 rounded w-full lg:w-auto  ${
+              className={`  text-black bg-gray-300 py-2 px-4 rounded w-full lg:w-auto  ${
                 clickedOption
                   ? option === question.answer
                     ? "bg-green-500"
