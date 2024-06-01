@@ -112,9 +112,9 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
 
   return (
     <div className="p-8">
-      <h2 className="text-lg font-bold mb-4">Leaderboard</h2>
+      <h2 className="text-lg font-bold mb-4 text-black">Leaderboard</h2>
       <center>
-        <p className="justify-center items-center font-semibold">
+        <p className="justify-center items-center font-semibold text-black">
           &#128151; 7 &#x1f48e; 208
         </p>
       </center>
@@ -140,7 +140,7 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
         />
       ))}
 
-      <button className="bg-pink-400 text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
+      <button className="bg-pink-400  text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
         &#128151; new life &#x1f48e; 200
       </button>
     </div>
