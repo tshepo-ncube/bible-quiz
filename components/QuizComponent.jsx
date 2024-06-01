@@ -297,7 +297,7 @@ export default function QuizComponent({
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <div className="p-4" style={{ marginTop: 18 }}>
         <center>
-          <p className="justify-center items-center font-semibold">
+          <p className="justify-center items-center font-semibold text-black">
             {" "}
             {soundOn ? (
               <>
