@@ -323,7 +323,9 @@ export default function QuizComponent({
           </p>
         </center>
 
-        <h2 className="text-lg font-bold mb-2">{question.question}</h2>
+        <h2 className="text-lg font-bold mb-2 text-black">
+          {question.question}
+        </h2>
         {/* <h2 className="text-sm font-semi-bold mb-2">{remain}</h2> */}
         {progress == 0 ? (
           <>

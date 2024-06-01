@@ -111,7 +111,7 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
   // console.log(itemsAboveAndBelow);
 
   return (
-    <div className="p-4">
+    <div className="p-8">
       <h2 className="text-lg font-bold mb-4">Leaderboard</h2>
       <center>
         <p className="justify-center items-center font-semibold">

@@ -6,7 +6,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Tebby",
+  title: "Bible Game",
   description: "For bible quizzes.",
 };
 
