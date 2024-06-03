@@ -127,6 +127,9 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
       >
         play
       </button>
+      <button className="bg-pink-400  text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
+        &#128151; new life &#x1f48e; 200
+      </button>
       <p className="text-green-500 mt-2 mb-2">
         The faster you answer, the more points you get!
       </p>
@@ -139,10 +142,6 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
           added={item.added}
         />
       ))}
-
-      <button className="bg-pink-400  text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
-        &#128151; new life &#x1f48e; 200
-      </button>
     </div>
   );
 }
