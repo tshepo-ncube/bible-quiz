@@ -41,10 +41,11 @@ export default function QuizComponent({
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
-  const [progress, setProgress] = useState(8);
+  const [progress, setProgress] = useState(7);
   const [showHint, setShowHint] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [interestFactShow, setInterestFactShow] = useState(false);
   const [Qoptions, setOptions] = useState(null);
   const newQuestionShow = () => {
     // console.log("Executing after 2 seconds");
@@ -52,6 +53,7 @@ export default function QuizComponent({
 
     // newQuestion();
     setShowHint(false);
+    setInterestFactShow(false);
     // setProgress(7);  setIntervalId(id);
     console.log("Executing after 2 seconds");
     setClickedOption(null);
@@ -59,7 +61,7 @@ export default function QuizComponent({
     newQuestion();
     // Clear the existing interval
     clearInterval(intervalId);
-    setProgress(8);
+    setProgress(7);
     decrementQuestion();
     // Start a new interval
     const id = setInterval(() => {
@@ -69,6 +71,7 @@ export default function QuizComponent({
           decrementQuestion();
           // Wait for 2 seconds before executing the delayedFunction
           clearInterval(id);
+          setInterestFactShow(true);
           event({
             action: "Time Up",
             category: "Quiz",
@@ -85,7 +88,7 @@ export default function QuizComponent({
         // }
         return prevProgress - 1;
       });
-    }, 1000);
+    }, 1700);
 
     setIntervalId(id);
   };
@@ -145,6 +148,7 @@ export default function QuizComponent({
           handleTimeup();
           setCurrentPoints(currentPoints - 40);
           decrementQuestion();
+          setInterestFactShow(true);
           event({
             action: "Time Up",
             category: "Quiz",
@@ -157,7 +161,7 @@ export default function QuizComponent({
         }
         return prevProgress - 1;
       });
-    }, 1000);
+    }, 1700);
 
     setIntervalId(id);
 
@@ -239,6 +243,7 @@ export default function QuizComponent({
     clearInterval(intervalId);
   };
   const handleButtonClick = (option) => {
+    setInterestFactShow(true);
     setClickedOption(option.target.name);
     stopProgress();
     console.log(option.target.name);
@@ -287,7 +292,7 @@ export default function QuizComponent({
     }
 
     // Wait for 2 seconds before executing the delayedFunction
-    setTimeout(newQuestionShow, 2000);
+    setTimeout(newQuestionShow, 3400);
   };
   const handleClick = (e) => {
     console.log(e);
@@ -337,7 +342,7 @@ export default function QuizComponent({
           <></>
         )}
         <div className="p-4">
-          <div className="relative h-10 bg-gray-800 rounded ">
+          <div className="relative w-full h-10 bg-gray-800 rounded ">
             <div
               className={`absolute top-0 left-0 text-center h-full rounded p-2 text-white ${
                 progress < 4 ? "bg-red-500" : "bg-blue-500"
@@ -362,7 +367,7 @@ export default function QuizComponent({
                   ? option === question.answer
                     ? "bg-green-500"
                     : clickedOption !== option
-                    ? "bg-white"
+                    ? "bg-gray-100"
                     : "bg-red-500"
                   : "bg-gray-100"
               }`}
@@ -374,26 +379,44 @@ export default function QuizComponent({
         {showHint ? (
           <>
             <p className=" text-black w-full mt-2 p-2 rounded">
-              {question.hint}
+              <span className="font-bold">Hint : </span> {question.hint}
             </p>
+            <hr />
           </>
         ) : (
           <></>
         )}
+
+        {interestFactShow ? (
+          <>
+            <p className=" text-black w-full mt-2 p-2 rounded">
+              <span className="font-bold">Interesting Fact : </span>
+              {question.interesting_fact}
+            </p>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
+
         <div className="mt-6">
-          <a
+          <button
             href="https://forms.gle/jxjnh5uFe1RksaREA"
             target="_blank"
+            onClick={() => {
+              window.open("https://forms.gle/jxjnh5uFe1RksaREA", "_blank");
+            }}
             className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-600"
           >
             Feeback on the game
-          </a>
-          {/* <button
+          </button>
+          <button
             onClick={handleHint}
             className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
           >
             show hint &#x1f48e; 100
           </button>
+          {/* 
 
           <button className="bg-purple-400 text-white w-full mt-4 p-2 rounded hover:bg-purple-800">
             more time &#x1f48e; 90
