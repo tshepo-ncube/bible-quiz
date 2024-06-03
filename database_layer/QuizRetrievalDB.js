@@ -27,7 +27,7 @@ export default class QuizRetrievalDB {
   static getQuestionsFromExcludedUserQuestionsArray = async (
     excludedQuestionArray
   ) => {
-    const easyQuestionsRef = collection(DB, "easy");
+    const easyQuestionsRef = collection(DB, "complete_the_verse");
     const qEasy = query(
       easyQuestionsRef,
       where("QuestionID", "not-in", excludedQuestionArray)
@@ -53,6 +53,39 @@ export default class QuizRetrievalDB {
     } catch (error) {
       console.error("Error getting Question Data: ", error);
       alert(error);
+    }
+  };
+
+  static getAllCompleteTheVerse = async () => {
+    const all = collection(db, "complete_the_verse");
+    try {
+      const snapshot = await getDocs(all);
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
+      const questionList = [];
+      snapshot.forEach((doc) => {
+        questionList.push(doc.data());
+        console.log({ id: doc.id, ...doc.data() });
+      });
+      localStorage.setItem(
+        "AllCompleteTheVerseQuestions",
+        JSON.stringify(questionList)
+      );
+
+      const questionsDone = localStorage.getItem("QuestionsDone");
+      if (!questionsDone) {
+        localStorage.setItem("QuestionsDone", JSON.stringify([]));
+      }
+      // //setEasyQuestions(questionList);
+      // const randomIndex = Math.floor(Math.random() * questionList.length);
+      // //   return ;
+      // setCurrentQuestion(questionList[randomIndex]);
+      // // getRandomObject();
+      // console.log(questionList);
+    } catch (error) {
+      console.error("Error getting documents: ", error);
     }
   };
 }

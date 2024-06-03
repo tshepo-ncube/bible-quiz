@@ -6,6 +6,7 @@ import Leaderboard from "@/components/LeaderboardComponent";
 import QuizComponent from "@/components/QuizComponent";
 import { CircularProgress } from "@mui/material";
 import ShopComponent from "@/components/ShopComponent";
+import QuizRetrieval from "../business_layer/QuizRetrieval";
 import React, { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
@@ -42,7 +43,7 @@ export default function Home() {
   const [currentPoints, setCurrentPoints] = useState(0);
   const [play, setPlay] = useState(true);
   const getEasyQuestions = async () => {
-    const easyQuestions = collection(db, "easy_level");
+    const easyQuestions = collection(db, "complete_the_verse");
     try {
       const snapshot = await getDocs(easyQuestions);
       if (snapshot.empty) {
