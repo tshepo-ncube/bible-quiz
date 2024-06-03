@@ -41,7 +41,7 @@ export default function QuizComponent({
   const [clickedOption, setClickedOption] = useState(null);
   const [playLevelUp, setPlayLevelUp] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
-  const [progress, setProgress] = useState(7);
+  const [progress, setProgress] = useState(12);
   const [showHint, setShowHint] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
@@ -59,7 +59,7 @@ export default function QuizComponent({
     newQuestion();
     // Clear the existing interval
     clearInterval(intervalId);
-    setProgress(7);
+    setProgress(12);
     decrementQuestion();
     // Start a new interval
     const id = setInterval(() => {
