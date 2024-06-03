@@ -88,7 +88,7 @@ export default function QuizComponent({
         // }
         return prevProgress - 1;
       });
-    }, 1700);
+    }, 2200);
 
     setIntervalId(id);
   };
@@ -161,7 +161,7 @@ export default function QuizComponent({
         }
         return prevProgress - 1;
       });
-    }, 1700);
+    }, 2200);
 
     setIntervalId(id);
 
@@ -292,7 +292,7 @@ export default function QuizComponent({
     }
 
     // Wait for 2 seconds before executing the delayedFunction
-    setTimeout(newQuestionShow, 3400);
+    setTimeout(newQuestionShow, 3800);
   };
   const handleClick = (e) => {
     console.log(e);
