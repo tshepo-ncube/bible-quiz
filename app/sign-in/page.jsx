@@ -35,17 +35,7 @@ const provider = new GoogleAuthProvider();
 // import { firebaseui } from "firebaseui";
 //var firebase = require("firebase");
 //var firebaseui = require("firebaseui");
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCMoOAhxxVqW8RkPNjoep0F6JeI0V89YKg",
-  authDomain: "tebby-e78fc.firebaseapp.com",
-  projectId: "tebby-e78fc",
-  storageBucket: "tebby-e78fc.appspot.com",
-  messagingSenderId: "411133037047",
-  appId: "1:411133037047:web:2b642aa67d09efc37f46f2",
-  measurementId: "G-WLHTNQ0HVY",
-};
-const app = initializeApp(firebaseConfig);
+
 // Initialize the FirebaseUI Widget using Firebase.
 function page() {
   const [signState, setSignState] = useState("SignIn");
@@ -109,6 +99,7 @@ function page() {
 
   return (
     <>
+      <Navbar />
       <HeaderComponent title={"SignIn | Mindful"} />
       <body>
         <div classNameName="mx-auto  max-w px-8">

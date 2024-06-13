@@ -6,16 +6,25 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Bible Game",
-  description: "For bible quizzes.",
+  title: "OpenTuition",
+  description: "For UCT students and donors.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Navbar />
+      {/* <Navbar isHome={true} />
+
+   
+      <br />
+      <br />
+      <br />
+
+      <body className={inter.className}>{children}</body> */}
+
       <GoogleAnalytics />
-      <body className={inter.className}>{children}</body>
+
+      <body>{children}</body>
     </html>
   );
 }

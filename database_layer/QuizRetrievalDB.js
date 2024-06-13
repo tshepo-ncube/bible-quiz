@@ -1,4 +1,4 @@
-import { DB } from "../database_layer/DB";
+import DB from "../database_layer/DB";
 
 import {
   getAuth,

@@ -12,23 +12,10 @@ import {
   signOut,
 } from "firebase/auth";
 
+import app from "../database_layer/App";
+
 const provider = new GoogleAuthProvider();
-//import { firebase } from "firebase";
-// import { firebaseui } from "firebaseui";
-//var firebase = require("firebase");
-//var firebaseui = require("firebaseui");
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCMoOAhxxVqW8RkPNjoep0F6JeI0V89YKg",
-  authDomain: "tebby-e78fc.firebaseapp.com",
-  projectId: "tebby-e78fc",
-  storageBucket: "tebby-e78fc.appspot.com",
-  messagingSenderId: "411133037047",
-  appId: "1:411133037047:web:2b642aa67d09efc37f46f2",
-  measurementId: "G-WLHTNQ0HVY",
-};
-const app = initializeApp(firebaseConfig);
-// Initialize the FirebaseUI Widget using Firebase.
+
 const Navbar = ({ isHome }) => {
   const [nav, setNav] = useState(false);
   const [color, setColor] = useState("#0096FF");
@@ -79,31 +66,31 @@ const Navbar = ({ isHome }) => {
       });
   };
 
-  const handleSignIn = () => {
-    console.log("handle signIn");
+  // const handleSignIn = () => {
+  //   console.log("handle signIn");
 
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  };
+  //   const auth = getAuth();
+  //   signInWithPopup(auth, provider)
+  //     .then((result) => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       // IdP data available using getAdditionalUserInfo(result)
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       // The email of the user's account used.
+  //       const email = error.customData.email;
+  //       // The AuthCredential type that was used.
+  //       const credential = GoogleAuthProvider.credentialFromError(error);
+  //       // ...
+  //     });
+  // };
 
   useEffect(() => {
     const changeColor = () => {
@@ -152,30 +139,25 @@ const Navbar = ({ isHome }) => {
       >
         <Link href="/">
           <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
-            Tebby
+            OpenTuition
           </h1>
         </Link>
         <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
-          <li className="p-4 text-white">
+          {/* <li className="p-4 text-white">
             <Link href="/" className="p-4 text-white">
               Play
             </Link>
-          </li>
-
-          {/* <li className="p-4">
-            <Link href="/chat" target={"_blank"}>
-              Chat
-            </Link>
           </li> */}
+
+          <li className="p-4">
+            <Link href="/">Donate</Link>
+          </li>
 
           {user ? (
             <>
-              {/* <li className="p-4">
-                <Link href="/goals">My Goals</Link>
-              </li> */}
-              {/* <li className="p-4">
+              <li className="p-4">
                 <Link href="/profile">Profile</Link>
-              </li> */}
+              </li>
             </>
           ) : (
             <>
@@ -184,9 +166,7 @@ const Navbar = ({ isHome }) => {
               </li> */}
             </>
           )}
-          <li className="p-4">
-            <Link href="/leaderboard">Leaderboard</Link>
-          </li>
+
           {/* <li className="p-4">
             <Link href="/shop">Shop</Link>
           </li> */}
@@ -197,7 +177,7 @@ const Navbar = ({ isHome }) => {
           {/* <li className="p-4">
             <Link href="/about">About</Link>
           </li> */}
-          {/* 
+
           <li className="p-4">
             {signedIn ? (
               <>
@@ -210,14 +190,7 @@ const Navbar = ({ isHome }) => {
                 <Link href="/sign-in">Sign In</Link>
               </>
             )}
-          </li> */}
-
-          {/* <li className='p-4'>
-            <Link href='/work'>Work</Link>
           </li>
-          <li className='p-4'>
-            <Link href='/contact'>Contact</Link>
-          </li> */}
         </ul>
 
         {/* Mobile Button */}
@@ -253,15 +226,7 @@ const Navbar = ({ isHome }) => {
             {/* <hr style={{ marginTop: 8 }} /> */}
 
             {user ? (
-              <>
-                {/* <li className="p-4 text-4xl hover:text-gray-500">
-                  <Link href="/goals">My Goals</Link>
-                </li>
-                <hr style={{ marginTop: 8 }} /> */}
-                {/* <li className="p-4 text-4xl hover:text-gray-500">
-                  <Link href="/profile">Profile</Link>
-                </li> */}
-              </>
+              <></>
             ) : (
               <>
                 {/* <li className="p-4 text-4xl hover:text-gray-500">
@@ -271,12 +236,6 @@ const Navbar = ({ isHome }) => {
               </>
             )}
 
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/leaderboard">Leaderboard</Link>
-            </li>
             <hr style={{ marginTop: 8 }} />
             {/* <li
               onClick={handleNav}
