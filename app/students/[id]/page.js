@@ -10,7 +10,7 @@ const StudentPage = ({ params }) => {
   const { id } = params;
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [waitingForResponse, setWaitingForResponse] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [responseOK, setResponseOk] = useState(null);
 
@@ -31,6 +31,7 @@ const StudentPage = ({ params }) => {
     e.preventDefault();
     localStorage.clear();
     try {
+      setWaitingForResponse(true);
       const response = await fetch(
         "http://localhost:3040/start_one_time_payment",
         {
@@ -49,7 +50,7 @@ const StudentPage = ({ params }) => {
 
       const data = await response.json();
       console.log(data);
-
+      setWaitingForResponse(false);
       if (response.ok) {
         setResponseMessage(`Server response: ${data.message}`);
         setResponseOk(true);
@@ -92,6 +93,7 @@ const StudentPage = ({ params }) => {
       continueAccessToken: localStorage.getItem("CONTINUE_ACCESS_TOKEN"),
       interactRef: interactRefParam,
       sendingWalletAddressUrl: senderWalletUrl,
+      msg: "Thanks for donating Lungile, I won't let you down Lungile",
     };
 
     try {
@@ -290,16 +292,27 @@ const StudentPage = ({ params }) => {
                       for="link-checkbox"
                       class="ms-2  text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      I would like to donate monthly until the amount is
-                      settled.
+                      monthly recurring payments
                     </label>
                   </div>
-                  <button
-                    onClick={handleSubmit}
-                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Donate
-                  </button>
+                  {waitingForResponse ? (
+                    <>
+                      <center>
+                        <CircularProgress
+                          style={{ marginTop: 10, width: 50, height: 50 }}
+                        />
+                      </center>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={handleSubmit}
+                        className="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Donate
+                      </button>
+                    </>
+                  )}
 
                   {!responseOK && <p className="mt-4">{responseMessage}</p>}
                   {responseOK && (
