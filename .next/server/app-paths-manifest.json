@@ -1,4 +1,7 @@
 {
+  "/students/[id]/page": "app/students/[id]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/profile/page": "app/profile/page.js",
-  "/students/[id]/page": "app/students/[id]/page.js"
+  "/page": "app/page.js",
+  "/donor_profile/page": "app/donor_profile/page.js"
 }

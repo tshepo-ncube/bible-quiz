@@ -153,12 +153,20 @@ const Navbar = ({ isHome }) => {
             <Link href="/">Donate</Link>
           </li>
 
+          <li className="p-4">
+            <Link href="/profile">Student Profile</Link>
+          </li>
+
+          <li className="p-4">
+            <Link href="/donor_profile">Donor Profile</Link>
+          </li>
+
+          <li className="p-4">
+            <Link href="/leaderboard">Donor Leaderboard</Link>
+          </li>
+
           {user ? (
-            <>
-              <li className="p-4">
-                <Link href="/profile">Profile</Link>
-              </li>
-            </>
+            <></>
           ) : (
             <>
               {/* <li className="p-4">

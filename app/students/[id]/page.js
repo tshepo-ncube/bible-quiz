@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-
+import Navbar from "@/components/Navbar";
 import db from "../../../database_layer/DB";
 const StudentPage = ({ params }) => {
   const { id } = params;
@@ -31,18 +31,21 @@ const StudentPage = ({ params }) => {
     e.preventDefault();
     localStorage.clear();
     try {
-      const response = await fetch("http://localhost:3040/api", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderWalletUrl,
-          contribution,
-          studentURL,
-          studentID,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:3040/start_one_time_payment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            senderWalletUrl,
+            contribution,
+            studentURL,
+            studentID,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log(data);
@@ -69,10 +72,11 @@ const StudentPage = ({ params }) => {
         localStorage.setItem("INTERACT_URL", data.INTERACT_URL);
       } else {
         setResponseMessage(`Error: ${data.error}`);
-        responseOK(false);
+
+        setResponseOk(false);
       }
     } catch (error) {
-      responseOK(false);
+      setResponseOk(false);
       setResponseMessage(`Error: ${error.message}`);
     }
   };
@@ -91,13 +95,16 @@ const StudentPage = ({ params }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:3040/finish_payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "http://localhost:3040/finish_one_time_payment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -171,128 +178,169 @@ const StudentPage = ({ params }) => {
   }
 
   return (
-    <div className="mt-20">
-      <div className="bg-gray-100 p-6">
-        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="md:flex">
-            <div className="md:flex-shrink-0 ml-4 mt-10">
-              <img
-                className="h-48 w-full object-cover md:w-48"
-                src="https://collegepossible.org/wp-content/uploads/2022/12/stock_students_091_web.png"
-                alt="Student"
-              />
-            </div>
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                Tshegofatso [2022 - 2024]
+    <div>
+      <Navbar />
+      <div className="mt-20">
+        <div className="bg-gray-100 p-6">
+          <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="md:flex">
+              <div className="md:flex-shrink-0 ml-4 mt-10">
+                <img
+                  className="h-48 w-full object-cover md:w-48"
+                  src="https://collegepossible.org/wp-content/uploads/2022/12/stock_students_091_web.png"
+                  alt="Student"
+                />
               </div>
-              <p className="block mt-1 text-lg leading-tight font-medium text-black">
-                Matriculated from Dithothwaneng University of South Africa, BED
-                (SEN PHASE FET TEACH) (90104), 2024, First Year (Graduating in
-                2026)
-              </p>
-              <p className="mt-2 text-gray-500">
-                Total funding needed R 6,470.00
-              </p>
-              <p className="mt-2 text-gray-500">
-                R 0.00 funded | R 6,470.00 funding left
-              </p>
+              <div className="p-8">
+                <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                  Tshegofatso [2022 - 2024]
+                </div>
+                <p className="block mt-1 text-lg leading-tight font-medium text-black">
+                  University of South Africa, MBChB, 2024, First Year
+                  (Graduating in 2026)
+                </p>
+                <p className="mt-2 text-gray-500">
+                  Total funding needed R 6,470.00
+                </p>
+                <p className="mt-2 text-gray-500">
+                  R 0.00 funded | R 6,470.00 funding left
+                </p>
 
-              <div className="flex mt-4">
-                <button className="flex-1 bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center">
-                  <span>Share to your network</span>
-                </button>
-                <div className="ml-2">
-                  <a href="#" className="text-blue-500">
-                    <i className="fab fa-facebook"></i>
-                  </a>
-                  <a href="#" className="ml-2 text-blue-300">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a href="#" className="ml-2 text-blue-600">
-                    <i className="fab fa-linkedin"></i>
-                  </a>
-                  <a href="#" className="ml-2 text-blue-400">
-                    <i className="fab fa-whatsapp"></i>
-                  </a>
+                <div className="flex mt-4">
+                  <button className="flex-1 bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span>Share to your network</span>
+                  </button>
+                  <div className="ml-2">
+                    <a href="#" className="text-blue-500">
+                      <i className="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" className="ml-2 text-blue-300">
+                      <i className="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" className="ml-2 text-blue-600">
+                      <i className="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" className="ml-2 text-blue-400">
+                      <i className="fab fa-whatsapp"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div>
+                    <label
+                      for="price"
+                      class="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Amount *
+                    </label>
+                    <div class="relative mt-2 rounded-md shadow-sm">
+                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="text-gray-500 sm:text-sm">R</span>
+                      </div>
+                      <input
+                        type="number"
+                        name="contribution"
+                        id="contribution"
+                        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="0.00"
+                        value={contribution}
+                        onChange={(e) => setContribution(e.target.value)}
+                      />
+                      <div class="absolute inset-y-0 right-0 flex items-center">
+                        <label for="currency" class="sr-only">
+                          Currency
+                        </label>
+                        <select
+                          id="currency"
+                          name="currency"
+                          class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                        >
+                          <option>ZAR</option>
+                          <option>USD</option>
+                          <option>CAD</option>
+                          <option>EUR</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* <label
+                    className="block mt-2 text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="contribution"
+                  >
+                    Wallet Address
+                  </label>
+                  <input
+                    className="shadow appearance-none border mt-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="wallet_address"
+                    type="text"
+                    value={senderWalletUrl}
+                    onChange={(e) => setSendingWalletAddressUrl(e.target.value)}
+                    placeholder="https://ilp.rafiki.money/tshepo"
+                  /> */}
+                  <div class="flex items-center mt-4">
+                    <input
+                      id="link-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    ></input>
+                    <label
+                      for="link-checkbox"
+                      class="ms-2  text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      I would like to donate monthly until the amount is
+                      settled.
+                    </label>
+                  </div>
+                  <button
+                    onClick={handleSubmit}
+                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Donate
+                  </button>
+
+                  {!responseOK && <p className="mt-4">{responseMessage}</p>}
+                  {responseOK && (
+                    <div>
+                      <button
+                        className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-600"
+                        onClick={handleRedirect}
+                      >
+                        Confirm Payment
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              <div className="mt-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="contribution"
-                >
-                  Select Your Contribution *
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="contribution"
-                  type="number"
-                  placeholder="R 100"
-                  value={contribution}
-                  onChange={(e) => setContribution(e.target.value)}
-                />
-
-                <label
-                  className="block mt-2 text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="contribution"
-                >
-                  Wallet Address
-                </label>
-                <input
-                  className="shadow appearance-none border mt-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="wallet_address"
-                  type="text"
-                  value={senderWalletUrl}
-                  onChange={(e) => setSendingWalletAddressUrl(e.target.value)}
-                  placeholder="https://ilp.rafiki.money/tshepo"
-                />
-                <button
-                  onClick={handleSubmit}
-                  className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Fund Now
-                </button>
-
-                {!responseOK && <p className="mt-4">{responseMessage}</p>}
-                {responseOK && (
-                  <div>
-                    <button
-                      className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-600"
-                      onClick={handleRedirect}
-                    >
-                      Confirm Payment
-                    </button>
-                  </div>
-                )}
-              </div>
             </div>
-          </div>
-          <div className="px-8 py-6">
-            <h2 className="text-2xl font-bold text-gray-800">My Story</h2>
-            <p className="mt-2 text-gray-600">
-              My name is Khensile. I am a 5th year medical student at Sefako
-              Makgatho Health Science University. I have managed to pass the
-              past four years of my course with hard work and dedication and did
-              not have to repeat any module/year. However, in my endeavor of
-              working towards becoming a medical doctor, I am faced with
-              financial struggles. I was funded by NSFAS for three years of my
-              degree, from second year until 4th year. I currently have no
-              funding because NSFAS has rejected my application for this
-              year(2024). I have applied for several bursaries with no luck.
-              Being a medical doctor has always been my dream since I was a
-              child. Although it’s not easy, I am dedicated to my work and a
-              hard worker. I am persistent and a firm believer in working
-              towards my dreams. I am eager to learn and better myself. In the
-              four years that I have completed my studies, I have learned a lot
-              about myself. Besides being a hard worker and being dedicated to
-              my work, I am a team player, I am patient, I enjoy working with
-              people, and I am kind. I believe these are the qualities needed in
-              someone who is on a path to becoming a doctor. Please help me
-              become the medical doctor that I’ve always wanted to be.
-              {/* Add the rest of the story content here */}
-            </p>
+            <div className="px-8 py-6">
+              <h2 className="text-2xl font-bold text-gray-800">My Story</h2>
+              <p className="mt-2 text-gray-600">
+                My name is Khensile. I am a 5th year medical student at Sefako
+                Makgatho Health Science University. I have managed to pass the
+                past four years of my course with hard work and dedication and
+                did not have to repeat any module/year. However, in my endeavor
+                of working towards becoming a medical doctor, I am faced with
+                financial struggles. I was funded by NSFAS for three years of my
+                degree, from second year until 4th year. I currently have no
+                funding because NSFAS has rejected my application for this
+                year(2024). I have applied for several bursaries with no luck.
+                Being a medical doctor has always been my dream since I was a
+                child. Although it’s not easy, I am dedicated to my work and a
+                hard worker. I am persistent and a firm believer in working
+                towards my dreams. I am eager to learn and better myself. In the
+                four years that I have completed my studies, I have learned a
+                lot about myself. Besides being a hard worker and being
+                dedicated to my work, I am a team player, I am patient, I enjoy
+                working with people, and I am kind. I believe these are the
+                qualities needed in someone who is on a path to becoming a
+                doctor. Please help me become the medical doctor that I’ve
+                always wanted to be.
+                {/* Add the rest of the story content here */}
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -172,8 +172,8 @@ export default function Home() {
 
 const SearchBar = () => {
   return (
-    <div className="flex items-center justify-center p-4 bg-white">
-      <div className="flex flex-col md:flex-row md:flex-wrap space-y-4 md:space-y-0 md:space-x-4 bg-white p-4 rounded-lg shadow-lg w-full max-w-6xl">
+    <div className="flex items-center justify-center p-4 ">
+      <div className="flex flex-col md:flex-row md:flex-wrap space-y-4 md:space-y-0 md:space-x-4  p-4  w-full max-w-6xl">
         <input
           type="text"
           placeholder="Name of student"
@@ -186,16 +186,18 @@ const SearchBar = () => {
         />
         <select className="mt-2 flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="">Sex</option>
-          <option value="engineering">Engineering</option>
-          <option value="arts">Arts</option>
-          <option value="science">Science</option>
+          <option value="engineering">Female</option>
+          <option value="arts">Male</option>
           {/* Add more options as needed */}
         </select>
         <select className="mt-2 flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="">Faculty Group</option>
-          <option value="engineering">Engineering</option>
-          <option value="arts">Arts</option>
+          <option value="engineering">Engineering Built and Environment</option>
+          <option value="arts">Humanities</option>
           <option value="science">Science</option>
+          <option value="science">Commerce</option>
+          <option value="science">Law</option>
+          <option value="science">Medicine</option>
           {/* Add more options as needed */}
         </select>
         {/* <select className="ml-2 mt-4 flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">

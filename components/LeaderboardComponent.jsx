@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import Navbar from "../components/Navbar";
 export default function LeaderboardComponent({ currentPoints, setPlay }) {
   const router = useRouter();
 
@@ -16,33 +17,19 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
   //   // Add more data as needed
   // ];
   const emailList = [
-    "harvey.mitchell@outlook.com",
-    "irene.norton@gmail.com",
-    "jeremy.oliver@gmail.com",
-    "kara.peters@gmail.com",
-    "leon.quigley@gmail.com",
-    "monica.rivers@gmail.com",
-    "nolan.stevens@yahoo.com",
-    "olive.tanner@yahoo.com",
-    "patrick.usher@yahoo.com",
-    "quincy.valentine@yahoo.com",
-    "rebecca.west@yahoo.com",
-    "samuel.xenos@outlook.com",
-    "tiffany.york@outlook.com",
-    "ursula.zane@outlook.com",
-    "victor.abbott@gmail.com",
-    "wendy.bell@gmail.com",
-    "xander.coleman@gmail.com",
-    "yolanda.dunn@gmail.com",
-    "zachary.ellis@gmail.com",
-    "aubrey.fitzgerald@outlook.com",
-    "brent.gaston@outlook.com",
-    "claire.harwood@outlook.com",
-    "dominic.irwin@outlook.com",
-    "elise.joyce@outlook.com",
-    "felix.knight@gmail.com",
-    "gemma.lloyd@gmail.com",
-    "harold.mann@gmail.com",
+    "Sarah Jones",
+    "Shaun Brick",
+    "Allan Davids",
+    "Max Kurapov",
+    "Mamodike Sadiki",
+    "Darryl N",
+    "Takunda Chirema",
+    "Andrew Mangle",
+    "Alexa M",
+    "Eino Mpinge",
+    "Saaleh Majiet",
+    "Meluleki Gama",
+    "Vuaya Paulo",
   ];
 
   // Function to generate a random number in a given range
@@ -111,37 +98,33 @@ export default function LeaderboardComponent({ currentPoints, setPlay }) {
   // console.log(itemsAboveAndBelow);
 
   return (
-    <div className="p-8">
-      <h2 className="text-lg font-bold mb-4 text-black">Leaderboard</h2>
-      <center>
-        <p className="justify-center items-center font-semibold text-black">
-          &#128151; 7 &#x1f48e; 208
+    <div>
+      <Navbar />
+      <div className="p-8">
+        <h2 className="text-lg font-bold mb-4 text-black">Donor Leaderboard</h2>
+
+        <button
+          className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-800"
+          onClick={() => {
+            router.push("/");
+          }}
+        >
+          Donate
+        </button>
+
+        <p className="text-green-500 mt-2 mb-2">
+          The faster you answer, the more points you get!
         </p>
-      </center>
-      <button
-        className="bg-green-500 text-white w-full mt-2 p-2 rounded hover:bg-green-800"
-        onClick={() => {
-          router.push("/");
-          setPlay(true);
-        }}
-      >
-        play
-      </button>
-      <button className="bg-pink-400  text-white w-full mt-4 p-2 rounded hover:bg-pink-800">
-        &#128151; new life &#x1f48e; 200
-      </button>
-      <p className="text-green-500 mt-2 mb-2">
-        The faster you answer, the more points you get!
-      </p>
-      {leaderboardData.map((item, index) => (
-        <LeaderboardItem
-          key={index}
-          rank={item.rank}
-          username={item.username}
-          points={item.points}
-          added={item.added}
-        />
-      ))}
+        {leaderboardData.map((item, index) => (
+          <LeaderboardItem
+            key={index}
+            rank={item.rank}
+            username={item.username}
+            points={item.points}
+            added={item.added}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -176,15 +159,8 @@ const LeaderboardItem = ({ rank, username, points, added }) => {
             </div>
 
             <div className="ml-14 flex items-center">
-              <p
-                className={`mr-2  ${
-                  added < 0 ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {added < 0 ? <>{added}</> : <>+{added}</>}
-              </p>
-              <div className="bg-green-500  text-white rounded w-10 h-10 flex items-center justify-center">
-                {points}
+              <div className="bg-green-500 w-14 text-white rounded w-10 h-10 flex items-center justify-center">
+                ${points}
               </div>
             </div>
           </div>
@@ -202,15 +178,15 @@ const LeaderboardItem = ({ rank, username, points, added }) => {
             </div>
 
             <div className="ml-14 flex items-center">
-              <p
+              {/* <p
                 className={`mr-2  ${
                   added < 0 ? "text-red-500" : "text-green-500"
                 }`}
               >
                 {added < 0 ? <>{added}</> : <>+{added}</>}
-              </p>
-              <div className="bg-green-500  text-white rounded p-2 h-10 flex items-center justify-center">
-                {points}
+              </p> */}
+              <div className="bg-green-500 w-14  text-white rounded p-2 h-10 flex items-center justify-center">
+                ${points}
               </div>
             </div>
           </div>
