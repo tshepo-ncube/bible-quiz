@@ -22,6 +22,7 @@ import {
   getDocs,
   runTransaction,
 } from "firebase/firestore";
+import PreLevel from "@/components/PreLevel";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCMoOAhxxVqW8RkPNjoep0F6JeI0V89YKg",
@@ -42,6 +43,24 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [currentPoints, setCurrentPoints] = useState(0);
   const [play, setPlay] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const event = ({ action, category, label, value }) => {
+    window.gtag("event", action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  };
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   const getEasyQuestions = async () => {
     const easyQuestions = collection(db, "complete_the_verse");
     try {
@@ -85,13 +104,19 @@ export default function Home() {
 
     if (remain == 0) {
       setPlay(false);
+      event({
+        action: "Display Leaderboard After Play",
+        category: "LeaderBoard After Play",
+        label: "LeaderBoard After Play",
+        value: "LeaderBoard After Play",
+      });
       setRemain(4);
     }
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
+    <main className="dark:bg-gray-900 flex min-h-screen flex-col items-center justify-between p-12">
       {loading ? (
-        <center>
+        <center className="dark:bg-gray-900 w-full h-full">
           <CircularProgress
             style={{ marginTop: 300, width: 150, height: 150 }}
           />
@@ -126,6 +151,10 @@ export default function Home() {
           )}
         </>
       )}
+
+      {/* <center>
+        <PreLevel />
+      </center> */}
     </main>
   );
 }
