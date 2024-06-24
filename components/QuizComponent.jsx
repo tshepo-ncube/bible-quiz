@@ -352,7 +352,7 @@ export default function QuizComponent({
           <></>
         )}
         <div className="p-4">
-          <div className="relative w-full h-3 bg-gray-800 rounded ">
+          <div className="relative w-full h-4 bg-gray-800 rounded ">
             <div
               className={`absolute top-0 left-0 text-center h-full rounded p-2 text-white ${
                 progress < 4 ? "bg-red-500" : "bg-blue-500"
