@@ -352,7 +352,7 @@ export default function QuizComponent({
           <></>
         )}
         <div className="p-4">
-          <div className="relative w-full h-10 bg-gray-800 rounded ">
+          <div className="relative w-full h-4 bg-gray-800 rounded ">
             <div
               className={`absolute top-0 left-0 text-center h-full rounded p-2 text-white ${
                 progress < 4 ? "bg-red-500" : "bg-blue-500"
@@ -423,6 +423,16 @@ export default function QuizComponent({
 
         <div className="mt-6">
           <button
+            href="https://buymeacoffee.com/mtsheponcuy"
+            target="_blank"
+            onClick={() => {
+              window.open("https://buymeacoffee.com/mtsheponcuy", "_blank");
+            }}
+            className="bg-blue-500 text-white w-full mt-2 p-2 rounded hover:bg-blue-600"
+          >
+            Feeback on the game
+          </button>
+          <button
             href="https://forms.gle/jxjnh5uFe1RksaREA"
             target="_blank"
             onClick={() => {
@@ -432,6 +442,7 @@ export default function QuizComponent({
           >
             Feeback on the game
           </button>
+
           <button
             onClick={handleHint}
             className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
