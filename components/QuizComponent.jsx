@@ -34,6 +34,16 @@ export default function QuizComponent({
     });
   };
 
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   // const addToCart = () => {
 
   // };
@@ -300,9 +310,9 @@ export default function QuizComponent({
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <div className="p-4" style={{ marginTop: 18 }}>
+      <div className="p-4 dark:bg-gray-900" style={{ marginTop: 18 }}>
         <center>
-          <p className="justify-center items-center font-semibold text-black">
+          <p className="justify-center items-center font-semibold text-black dark:text-white">
             {" "}
             {soundOn ? (
               <>
@@ -328,7 +338,7 @@ export default function QuizComponent({
           </p>
         </center>
 
-        <h2 className="text-lg font-bold mb-2 text-black">
+        <h2 className="text-lg font-bold mb-2 text-black dark:text-white">
           {question.question}
         </h2>
         {/* <h2 className="text-sm font-semi-bold mb-2">{remain}</h2> */}
@@ -352,11 +362,23 @@ export default function QuizComponent({
                 transition: "width 1s ease-in-out",
               }}
             >
-              {progress}
+              {/* {progress} */}
             </div>
+
+            {/* <center>
+              <p
+                style={{
+                  zIndex: 99,
+                }}
+                className="z-30 text-center h-full rounded p-2 text-white"
+              >
+                {" "}
+                {progress} seconds remaining
+              </p>
+            </center> */}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
+        <div className="dark:bg-gray-900 grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
           {question.options.map((option, index) => (
             <button
               key={index}
@@ -378,7 +400,7 @@ export default function QuizComponent({
         </div>
         {showHint ? (
           <>
-            <p className=" text-black w-full mt-2 p-2 rounded">
+            <p className=" dark:text-white text-black w-full mt-2 p-2 rounded">
               <span className="font-bold">Hint : </span> {question.hint}
             </p>
             <hr />
@@ -389,7 +411,7 @@ export default function QuizComponent({
 
         {interestFactShow ? (
           <>
-            <p className=" text-black w-full mt-2 p-2 rounded">
+            <p className="dark:text-white text-black w-full mt-2 p-2 rounded">
               <span className="font-bold">Interesting Fact : </span>
               {question.interesting_fact}
             </p>

@@ -152,7 +152,7 @@ const Navbar = ({ isHome }) => {
       >
         <Link href="/">
           <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
-            Tebby
+            BibleGame.online
           </h1>
         </Link>
         <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
@@ -162,11 +162,11 @@ const Navbar = ({ isHome }) => {
             </Link>
           </li>
 
-          {/* <li className="p-4">
-            <Link href="/chat" target={"_blank"}>
-              Chat
+          <li className="p-4">
+            <Link href="/levels" target={"_blank"}>
+              Levels
             </Link>
-          </li> */}
+          </li>
 
           {user ? (
             <>
@@ -214,10 +214,10 @@ const Navbar = ({ isHome }) => {
 
           {/* <li className='p-4'>
             <Link href='/work'>Work</Link>
-          </li>
-          <li className='p-4'>
-            <Link href='/contact'>Contact</Link>
           </li> */}
+          <li className="p-4">
+            <div>Dark Mode</div>
+          </li>
         </ul>
 
         {/* Mobile Button */}
@@ -245,12 +245,12 @@ const Navbar = ({ isHome }) => {
             </li>
             <hr style={{ marginTop: 8 }} />
 
-            {/* <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/chat" target={"_blank"}>
-                Chat
+            <li className="p-4 text-4xl hover:text-gray-500">
+              <Link href="/levels" target={"_blank"}>
+                Levels
               </Link>
-            </li> */}
-            {/* <hr style={{ marginTop: 8 }} /> */}
+            </li>
+            <hr style={{ marginTop: 8 }} />
 
             {user ? (
               <>
