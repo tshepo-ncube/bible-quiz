@@ -114,7 +114,7 @@ export default function Home() {
     }
   };
   return (
-    <main className="dark:bg-gray-900 flex min-h-screen flex-col items-center justify-between p-12">
+    <main className="dark:bg-gray-900 flex min-h-screen flex-col items-center justify-between p-2">
       {loading ? (
         <center className="dark:bg-gray-900 w-full h-full">
           <CircularProgress

@@ -309,8 +309,8 @@ export default function QuizComponent({
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <div className="p-4 dark:bg-gray-900" style={{ marginTop: 18 }}>
+    <main className="flex min-h-screen flex-col items-center justify-between p-2">
+      <div className="p-2 dark:bg-gray-900 mt-52" style={{ marginTop: 72 }}>
         <center>
           <p className="justify-center items-center font-semibold text-black dark:text-white">
             {" "}
@@ -378,7 +378,7 @@ export default function QuizComponent({
             </center> */}
           </div>
         </div>
-        <div className="dark:bg-gray-900 grid grid-cols-2 gap-4 lg:grid-cols-2 sm:grid-cols-2">
+        <div className="dark:bg-gray-900 grid  gap-4 lg:grid-cols-2 sm:grid-cols-1  md:grid-cols-1">
           {question.options.map((option, index) => (
             <button
               key={index}
@@ -423,6 +423,17 @@ export default function QuizComponent({
 
         <div className="mt-6">
           <button
+            onClick={handleHint}
+            className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
+          >
+            show hint &#x1f48e; 100
+          </button>
+          <center>
+            <p className="dark:text-white mt-2 text-black text-sm">
+              Please donate to keep the game in development
+            </p>
+          </center>
+          <button
             href="https://buymeacoffee.com/mtsheponcuy"
             target="_blank"
             onClick={() => {
@@ -430,7 +441,7 @@ export default function QuizComponent({
             }}
             className="bg-blue-500 text-white w-full mt-2 p-2 rounded hover:bg-blue-600"
           >
-            Feeback on the game
+            Donate
           </button>
           <button
             href="https://forms.gle/jxjnh5uFe1RksaREA"
@@ -443,12 +454,6 @@ export default function QuizComponent({
             Feeback on the game
           </button>
 
-          <button
-            onClick={handleHint}
-            className="bg-yellow-500 text-white w-full mt-2 p-2 rounded hover:bg-yellow-600"
-          >
-            show hint &#x1f48e; 100
-          </button>
           {/* 
 
           <button className="bg-purple-400 text-white w-full mt-4 p-2 rounded hover:bg-purple-800">
